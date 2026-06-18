@@ -10,7 +10,7 @@ gem "importmap-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 gem "mailtrap"
 gem "dotenv-rails"
 
