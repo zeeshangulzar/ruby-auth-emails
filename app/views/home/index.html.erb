@@ -1,0 +1,16 @@
+<h1>Ruby on Rails — Auth Emails with Mailtrap</h1>
+<p>This sample app demonstrates email verification and password reset using Devise + Mailtrap.</p>
+
+<ul>
+  <li>Register an account — a confirmation email is sent via Mailtrap</li>
+  <li>Click the confirmation link to verify your email address</li>
+  <li>Use "Forgot password" to receive a time-limited reset link</li>
+  <li>Unconfirmed users cannot access protected pages</li>
+</ul>
+
+<% unless user_signed_in? %>
+  <p>
+    <%= link_to "Create an account", new_user_registration_path %> or
+    <%= link_to "sign in", new_user_session_path %>
+  </p>
+<% end %>
