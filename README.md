@@ -20,8 +20,8 @@ New users must verify their email address before accessing protected pages. Pass
 ```
 Browser → Rails → Devise → ActionMailer
                                 ↓
-                   development: Mailtrap Email Sending (SMTP — live.smtp.mailtrap.io)
-                   production:  Mailtrap Email Sending (API via mailtrap gem)
+                   development: Mailtrap SMTP (live.smtp.mailtrap.io)
+                   production:  Mailtrap Email API (via mailtrap gem)
 ```
 
 ## Requirements
@@ -50,9 +50,9 @@ Open `http://localhost:3000` in your browser.
 
 ### Mailtrap setup
 
-This app uses **Mailtrap Email Sending** (real delivery, not the Sandbox testing product):
+This app uses **Mailtrap Email API/SMTP** for real email delivery. If you'd rather inspect emails without actually delivering them during development, you can point ActionMailer at [Mailtrap Email Sandbox](https://mailtrap.io/email-sandbox/) instead — but the default setup below uses the live sending path.
 
-1. Sign in to [Mailtrap](https://mailtrap.io) → **Email Sending** → **Sending Domains**
+1. Sign in to [Mailtrap](https://mailtrap.io) → **Domains**
 2. Either add and verify your own domain, or use the free **`demomailtrap.co`** demo domain that is pre-created for every account
    - The demo domain can only deliver to your Mailtrap account email address — great for local testing, not for reaching real users
 3. Go to **Settings** → **API Tokens** → **Add API Token** and give it the **Admin** permission on your sending domain
@@ -93,14 +93,14 @@ This app uses **Mailtrap Email Sending** (real delivery, not the Sandbox testing
 | `app/views/devise/mailer/confirmation_instructions.text.erb` | Plain-text confirmation email |
 | `app/views/devise/mailer/reset_password_instructions.html.erb` | HTML password reset email template |
 | `app/views/devise/mailer/reset_password_instructions.text.erb` | Plain-text password reset email |
-| `config/initializers/mailtrap.rb` | Activates the Mailtrap Sending API adapter in production |
-| `config/environments/development.rb` | Configures Mailtrap Email Sending via SMTP for development |
+| `config/initializers/mailtrap.rb` | Activates the Mailtrap Email API adapter in production |
+| `config/environments/development.rb` | Configures Mailtrap SMTP for development |
 | `config/initializers/devise.rb` | Devise configuration (token TTL, sender address) |
 | `app/controllers/application_controller.rb` | Guards against unconfirmed sign-ins |
 
 ## Mailtrap Integration
 
-**Development** uses Mailtrap Email Sending over live SMTP — emails are delivered through your verified sending domain:
+**Development** uses Mailtrap SMTP — emails are delivered through your verified sending domain via `live.smtp.mailtrap.io`:
 
 ```ruby
 # config/environments/development.rb
@@ -114,7 +114,7 @@ config.action_mailer.smtp_settings = {
 }
 ```
 
-**Production** uses the Mailtrap Sending API via the official [`mailtrap`](https://github.com/railsware/mailtrap-ruby) gem:
+**Production** uses the Mailtrap Email API via the official [`mailtrap`](https://github.com/railsware/mailtrap-ruby) gem:
 
 ```ruby
 # config/initializers/mailtrap.rb

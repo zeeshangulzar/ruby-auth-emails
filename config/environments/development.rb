@@ -36,7 +36,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
   config.action_mailer.default_options = { from: ENV.fetch("MAILTRAP_FROM_EMAIL", "no-reply@example.com") }
 
-  # Mailtrap Email Sending via SMTP — real delivery through your verified sending domain
+  # Mailtrap SMTP — real email delivery through your verified sending domain
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     user_name: "api",
