@@ -1,9 +1,10 @@
 require "mailtrap"
 
-# Production: use Mailtrap Sending API (requires a verified sending domain)
-if Rails.env.production? && ENV["MAILTRAP_API_KEY"].present?
+# Production: use the Mailtrap Sending API (via the mailtrap gem)
+# Development uses the same live SMTP endpoint (see config/environments/development.rb)
+if Rails.env.production? && ENV["MAILTRAP_API_TOKEN"].present?
   Rails.application.config.action_mailer.delivery_method = :mailtrap
   Rails.application.config.action_mailer.mailtrap_settings = {
-    api_key: ENV["MAILTRAP_API_KEY"]
+    api_key: ENV["MAILTRAP_API_TOKEN"]
   }
 end
