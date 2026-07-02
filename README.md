@@ -109,7 +109,7 @@ config.action_mailer.smtp_settings = {
   user_name: "api",
   password:  ENV["MAILTRAP_API_TOKEN"],
   address:   "live.smtp.mailtrap.io",
-  port:      587,
+  port:      2525,
   authentication: :login
 }
 ```
